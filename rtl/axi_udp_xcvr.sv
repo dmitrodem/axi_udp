@@ -60,6 +60,11 @@ module axi_udp_xcvr #(
   wire [47:0]  fsm2arp_dst_mac;
   wire [31:0]  fsm2arp_dst_ip;
 
+  wire         arp_lookup_req;
+  wire         arp_lookup_valid;
+  wire [31:0]  arp_lookup_ip;
+  wire [47:0]  arp_lookup_mac;
+
   wire         arp2eth_req;
   wire         arp2eth_ack;
   wire [47:0]  arp2eth_dst_mac;
@@ -178,7 +183,12 @@ module axi_udp_xcvr #(
     .arp_tx_src_mac (fsm2arp_src_mac),
     .arp_tx_src_ip  (fsm2arp_src_ip),
     .arp_tx_dst_mac (fsm2arp_dst_mac),
-    .arp_tx_dst_ip  (fsm2arp_dst_ip));
+    .arp_tx_dst_ip  (fsm2arp_dst_ip),
+
+    .arp_lookup_req   (arp_lookup_req),
+    .arp_lookup_ip    (arp_lookup_ip),
+    .arp_lookup_valid (arp_lookup_valid),
+    .arp_lookup_mac   (arp_lookup_mac));
 
  axi_arp_tx #(
     .DEBUG   (1),
@@ -290,7 +300,6 @@ module axi_udp_xcvr #(
   initial begin
     $timeformat(-6, 0, "us", 10);
   end
-
 
 endmodule : axi_udp_xcvr
 `default_nettype wire

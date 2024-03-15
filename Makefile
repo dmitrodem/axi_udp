@@ -10,6 +10,7 @@ VERILOG_SOURCES += $(shell pwd)/rtl/axi_eth_tx.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_udp_xcvr.sv
 
 TOPLEVEL = axi_udp_xcvr
-MODULE = tb_axi_udp_rx
+MODULE = sim.tb_axi_udp_rx
+SIM = verilator
 
 include $(shell cocotb-config --makefiles)/Makefile.sim

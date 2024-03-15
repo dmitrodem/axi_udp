@@ -129,7 +129,7 @@ module axi_eth_rx #(
         case (r.ethertype)
           ETHERTYPE_ARP  : tready = arp_axis_tready;
           ETHERTYPE_IPV4 : tready = ip_axis_tready;
-          default:;
+          default        : tready = 1'b1;
         endcase // case (r.ethertype)
       end      
       default:;

@@ -13,6 +13,7 @@ package axi_udp_pkg;
   localparam bit [7:0]  ARP_HW_SIZE      = 8'h06;
   localparam bit [7:0]  ARP_PROTO_SIZE   = 8'h04;
 
+  localparam bit [15:0] ARP_OPER_NONE    = 16'h0000;
   localparam bit [15:0] ARP_OPER_REQUEST = 16'h0001;
   localparam bit [15:0] ARP_OPER_REPLY   = 16'h0002;
 

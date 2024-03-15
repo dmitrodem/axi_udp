@@ -35,7 +35,8 @@ module axi_arp_tx #(
   typedef enum bit [7:0] {
     S_LISTEN,
     S_REQ_TX,
-    S_SEND_REPLY
+    S_SEND_REPLY,
+    S_REPLY_LEADOUT
   } state_t;
 
   typedef struct packed {
@@ -117,11 +118,15 @@ module axi_arp_tx #(
               v.tdata = arp_dst_ip[ 7-:8];
               v.tlast = 1'b1;
               v.ack   = 1'b1;
-              v.state = S_LISTEN;
+              v.state = S_REPLY_LEADOUT;
             end
           endcase // case (r.index)
           v.index = r.index + 1;
         end
+      end // case: S_SEND_REPLY
+      S_REPLY_LEADOUT: begin
+        v.ack   = 1'b0;
+        v.state = S_LISTEN;
       end
       default:;
     endcase // case (r.state)
