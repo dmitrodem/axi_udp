@@ -105,6 +105,21 @@ module axi_udp_xcvr #(
   wire         port3_axis_tvalid;
   wire         port3_axis_tready;
 
+  wire [7:0]   ip2icmp_axis_tdata;
+  wire         ip2icmp_axis_tlast;
+  wire         ip2icmp_axis_tvalid;
+  wire         ip2icmp_axis_tready;
+
+  wire [7:0]   ip2udp_axis_tdata;
+  wire         ip2udp_axis_tlast;
+  wire         ip2udp_axis_tvalid;
+  wire         ip2udp_axis_tready;
+
+  wire         ip_valid;
+  wire [7:0]   ip_ttl;
+  wire [15:0]  ip_id;
+  wire [31:0]  ip_source_ip;
+  wire [31:0]  ip_target_ip;
 
   axi_eth_rx #(
     .DEBUG   (1),
@@ -217,6 +232,37 @@ module axi_udp_xcvr #(
    .eth_axis_tlast  (arp2eth_axis_tlast),
    .eth_axis_tvalid (arp2eth_axis_tvalid),
    .eth_axis_tready (arp2eth_axis_tready));
+
+  axi_ip_rx #(
+    .DEBUG   (1),
+    .MAC_MSB (MAC_MSB),
+    .MAC_LSB (MAC_LSB),
+    .IP_MSB  (IP_MSB),
+    .IP_LSB  (IP_LSB))
+  ip_rx0 (
+    .clk           (clk),
+    .aresetn       (aresetn),
+
+    .s_axis_tvalid (eth2ip_axis_tvalid),
+    .s_axis_tdata  (eth2ip_axis_tdata),
+    .s_axis_tlast  (eth2ip_axis_tlast),
+    .s_axis_tready (eth2ip_axis_tready),
+
+    .ip_valid     (ip_valid),
+    .ip_ttl       (ip_ttl),
+    .ip_id        (ip_id),
+    .ip_source_ip (ip_source_ip),
+    .ip_target_ip (ip_target_ip),
+
+    .icmp_axis_tvalid (ip2icmp_axis_tvalid),
+    .icmp_axis_tdata  (ip2icmp_axis_tdata),
+    .icmp_axis_tlast  (ip2icmp_axis_tlast),
+    .icmp_axis_tready (ip2icmp_axis_tready),
+
+    .udp_axis_tvalid (ip2udp_axis_tvalid),
+    .udp_axis_tdata  (ip2udp_axis_tdata),
+    .udp_axis_tlast  (ip2udp_axis_tlast),
+    .udp_axis_tready (ip2udp_axis_tready));
 
   axi_eth_tx #(
     .DEBUG   (1),

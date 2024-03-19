@@ -36,6 +36,9 @@ async def tap_to_axis(dut):
     dut.arp_lookup_req.setimmediatevalue(0)
     dut.arp_lookup_ip.setimmediatevalue(0)
 
+    dut.ip2icmp_axis_tready.setimmediatevalue(1)
+    dut.ip2udp_axis_tready.setimmediatevalue(1)
+
     async def gen_reset():
         dut.aresetn.setimmediatevalue(0)
         for _ in range(10):

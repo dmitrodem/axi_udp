@@ -66,7 +66,7 @@ module axi_eth_rx #(
   reg_t rin;
 
   bit tready;
-  
+
   always_comb begin
     reg_t v;
     v = r;
@@ -131,9 +131,9 @@ module axi_eth_rx #(
           ETHERTYPE_IPV4 : tready = ip_axis_tready;
           default        : tready = 1'b1;
         endcase // case (r.ethertype)
-      end      
+      end
       default:;
-    endcase // case (r.state)   
+    endcase // case (r.state)
   end
 
   always_ff @(posedge clk) begin

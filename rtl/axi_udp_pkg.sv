@@ -17,5 +17,12 @@ package axi_udp_pkg;
   localparam bit [15:0] ARP_OPER_REQUEST = 16'h0001;
   localparam bit [15:0] ARP_OPER_REPLY   = 16'h0002;
 
+  localparam bit [3:0]  IP_VERSION       = 4'h4;
+  localparam bit [3:0]  IP_HDR_LENGTH    = 4'h5;
+
+  localparam bit [7:0]  IP_PROTO_ICMP    = 8'h01;
+  localparam bit [7:0]  IP_PROTO_TCP     = 8'h06;
+  localparam bit [7:0]  IP_PROTO_UDP     = 8'h11;
+
 endpackage : axi_udp_pkg
 `default_nettype wire

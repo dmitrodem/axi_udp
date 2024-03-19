@@ -6,6 +6,7 @@ VERILOG_SOURCES += $(shell pwd)/rtl/axi_eth_rx.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_arp_rx.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_arp_fsm.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_arp_tx.sv
+VERILOG_SOURCES += $(shell pwd)/rtl/axi_ip_rx.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_eth_tx.sv
 VERILOG_SOURCES += $(shell pwd)/rtl/axi_udp_xcvr.sv
 
